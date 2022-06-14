@@ -12,6 +12,7 @@ object Version {
 
 object Libs {
     const val gradle = "com.android.tools.build:gradle:7.2.0"
+    const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:2.28-alpha"
 
     object Kotlin {
         private const val ver = "1.6.21"
@@ -25,6 +26,12 @@ object Libs {
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$ver"
         const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$ver"
         const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$ver"
+    }
+
+    object DependencyInjection {
+        private const val ver = "2.28-alpha"
+        const val hilt = "com.google.dagger:hilt-android:$ver"
+        const val hiltKapt = "com.google.dagger:hilt-android-compiler:$ver"
     }
 
     object AndroidX {
