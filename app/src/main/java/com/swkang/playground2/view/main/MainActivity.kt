@@ -1,4 +1,4 @@
-package com.swkang.playground2
+package com.swkang.playground2.view.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
