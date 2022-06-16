@@ -32,6 +32,23 @@ object Libs {
         private const val ver = "2.42"
         const val hilt = "com.google.dagger:hilt-android:$ver"
         const val hiltKapt = "com.google.dagger:hilt-android-compiler:$ver"
+        const val hiltViewModel = "androidx.hilt:hilt-lifecycle-viewmodel$ver"
+    }
+
+    object Network {
+        private const val retrofitVer = "2.9.0"
+        const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVer"
+        private const val moshiConVer = "2.9.0"
+        const val moshiConverter = "com.squareup.retrofit2:converter-moshi:$moshiConVer"
+
+        private const val okHttpVer = "4.10.0"
+        const val okHttpLoggin = "com.squareup.okhttp3:logging-interceptor:$okHttpVer"
+    }
+
+    object GoogleBilling {
+        private const val ver = "5.0.0"
+        const val billing = "com.android.billingclient:billing:$ver"
+        const val billingKtx = "com.android.billingclient:billing-ktx:$ver"
     }
 
     object AndroidX {

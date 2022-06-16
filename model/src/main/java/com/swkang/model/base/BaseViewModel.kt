@@ -1,4 +1,4 @@
-package com.swkang.playground2.model
+package com.swkang.model.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

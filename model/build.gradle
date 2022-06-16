@@ -1,0 +1,63 @@
+import com.swkang.playground2.buildsrc.Version
+import com.swkang.playground2.buildsrc.Libs
+
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdk = Version.compileSdk
+
+    defaultConfig {
+        minSdk Version.minSdk
+        targetSdk Version.targetSdk
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    kapt {
+        correctErrorTypes = true
+    }
+    dexOptions {
+        preDexLibraries = false
+        javaMaxHeapSize '2048M'
+    }
+}
+
+dependencies {
+    implementation Libs.Coroutines.android
+    implementation Libs.Kotlin.stdLibs
+
+    implementation Libs.AndroidX.coreKtx
+    implementation Libs.AndroidX.appcompat
+    implementation Libs.AndroidX.Lifecycle.viewmodel
+    implementation Libs.AndroidX.Lifecycle.viewModelCompose
+    implementation Libs.DependencyInjection.hilt
+    implementation Libs.DependencyInjection.hiltViewModel
+    kapt Libs.DependencyInjection.hiltKapt
+    implementation Libs.GoogleBilling.billing
+    implementation Libs.GoogleBilling.billingKtx
+    implementation Libs.Network.retrofit
+    implementation Libs.Network.moshiConverter
+    implementation Libs.Network.okHttpLoggin
+
+    testImplementation Libs.UnitTesting.junit
+}

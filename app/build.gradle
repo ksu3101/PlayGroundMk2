@@ -83,11 +83,16 @@ dependencies {
 	debugImplementation Libs.AndroidX.Compose.tooling
 	implementation Libs.Coil.coilCompose
 	implementation Libs.DependencyInjection.hilt
+	implementation Libs.DependencyInjection.hiltViewModel
 	kapt Libs.DependencyInjection.hiltKapt
+	implementation Libs.GoogleBilling.billing
+	implementation Libs.GoogleBilling.billingKtx
 
 	testImplementation Libs.UnitTesting.junit
 	testImplementation Libs.AndroidX.Test.core
 	testImplementation Libs.AndroidX.Test.rules
 	testImplementation Libs.AndroidX.Test.Ext.androidXjunit
 	testImplementation Libs.AndroidX.Test.Ext.truth
+
+	implementation project(':model')
 }
