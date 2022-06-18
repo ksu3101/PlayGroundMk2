@@ -1,8 +1,8 @@
 package com.swkang.playground2.di
 
 import android.content.Context
-import com.swkang.playground2.helper.ResourceHelper
-import com.swkang.playground2.helper.ResourceHelperImpl
+import com.swkang.playground2.base.helper.ResourceHelper
+import com.swkang.playground2.base.helper.ResourceHelperImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

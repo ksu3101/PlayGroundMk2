@@ -1,4 +1,4 @@
-package com.swkang.playground2.helper
+package com.swkang.playground2.base.helper
 
 interface ResourceHelper {
     fun getString(strResId: Int): String

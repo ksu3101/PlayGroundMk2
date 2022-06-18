@@ -1,4 +1,4 @@
-package com.swkang.playground2.ui.theme
+package com.swkang.playground2.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

@@ -1,4 +1,4 @@
-package com.swkang.playground2.ui.theme
+package com.swkang.playground2.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
