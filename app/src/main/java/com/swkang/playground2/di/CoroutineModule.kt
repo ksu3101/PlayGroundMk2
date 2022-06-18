@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import javax.inject.Qualifier
 
 /**
- * @author burkd
+ * @author burkdog
  */
 @InstallIn(SingletonComponent::class)
 @Module

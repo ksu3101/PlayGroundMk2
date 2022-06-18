@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 
 /**
- * @author burkd
+ * @author burkdog
  */
 class BaseViewModel : ViewModel() {
 

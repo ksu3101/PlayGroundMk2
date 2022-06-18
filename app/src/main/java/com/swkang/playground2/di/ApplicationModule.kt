@@ -14,7 +14,7 @@ import kotlinx.coroutines.SupervisorJob
 import javax.inject.Singleton
 
 /**
- * @author burkd
+ * @author burkdog
  */
 @InstallIn(SingletonComponent::class)
 @Module

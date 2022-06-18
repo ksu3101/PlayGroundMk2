@@ -4,7 +4,7 @@ import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 /**
- * @author burkd
+ * @author burkdog
  */
 @HiltAndroidApp
-class PlayGroundApplication: Application()
+class PlayGroundApplication : Application()

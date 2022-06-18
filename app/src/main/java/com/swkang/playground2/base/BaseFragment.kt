@@ -3,6 +3,6 @@ package com.swkang.playground2.base
 import androidx.fragment.app.Fragment
 
 /**
- * @author burkd
+ * @author burkdog
  */
 abstract class BaseFragment : Fragment()

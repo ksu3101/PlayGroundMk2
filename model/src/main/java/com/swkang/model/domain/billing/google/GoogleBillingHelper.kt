@@ -1,6 +1,6 @@
 package com.swkang.model.domain.billing.google
 
 /**
- * @author burkd
+ * @author burkdog
  */
 interface GoogleBillingHelper

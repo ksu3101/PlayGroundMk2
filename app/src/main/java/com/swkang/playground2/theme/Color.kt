@@ -1,7 +1,6 @@
 package com.swkang.playground2.theme
 
 import androidx.compose.ui.graphics.Color
-import com.swkang.playground2.R
 
 val Blue10 = Color(0xFF000F5E)
 val Blue20 = Color(0xFF001E92)

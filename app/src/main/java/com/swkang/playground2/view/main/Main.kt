@@ -67,14 +67,16 @@ fun Main() {
         content = { innerPadding ->
             LazyColumn(contentPadding = innerPadding) {
                 items(count = 10) {
-                    Box(modifier = Modifier
-                        .fillMaxWidth()
-                        .height(60.dp)
-                        .background(colors[it % colors.size])
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(60.dp)
+                            .background(colors[it % colors.size])
                     )
                 }
             }
-        })
+        }
+    )
 }
 
 @Composable
