@@ -21,13 +21,21 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.swkang.playground2.R
+import com.swkang.playground2.theme.Blue40
 import com.swkang.playground2.theme.PlayGroundTheme
+import com.swkang.playground2.theme.Red40
+import com.swkang.playground2.theme.Yellow80
 import kotlinx.coroutines.launch
 
 @Composable
 fun Main() {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
+    val colors = arrayListOf(
+        Blue40,
+        Yellow80,
+        Red40
+    )
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
@@ -59,11 +67,11 @@ fun Main() {
         content = { innerPadding ->
             LazyColumn(contentPadding = innerPadding) {
                 items(count = 10) {
-//                    Box(modifier = Modifier
-//                        .fillMaxWidth()
-//                        .height(60.dp)
-//                        .background()
-//                    )
+                    Box(modifier = Modifier
+                        .fillMaxWidth()
+                        .height(60.dp)
+                        .background(colors[it % colors.size])
+                    )
                 }
             }
         })

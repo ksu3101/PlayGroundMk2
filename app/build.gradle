@@ -71,15 +71,20 @@ dependencies {
 
 	implementation Libs.AndroidX.coreKtx
 	implementation Libs.AndroidX.appcompat
-	implementation Libs.AndroidX.Material.material
+
+	// material design
+	implementation Libs.Material.material3
+	implementation Libs.AndroidX.Compose.material
+	implementation Libs.AndroidX.Compose.materialIconsExtended
+	implementation Libs.AndroidX.Compose.Material3.material3
+
 	implementation Libs.AndroidX.Lifecycle.viewmodel
 	implementation Libs.AndroidX.Lifecycle.viewModelCompose
 	implementation Libs.AndroidX.Compose.activityCompose
-	implementation Libs.AndroidX.Compose.material
-	implementation Libs.AndroidX.Compose.materialIconsExtended
 	implementation Libs.AndroidX.Compose.toolingPreview
 	implementation Libs.AndroidX.Compose.runtime
 	implementation Libs.AndroidX.Compose.runtimeLivedata
+	implementation Libs.AndroidX.Compose.font
 	debugImplementation Libs.AndroidX.Compose.tooling
 	implementation Libs.Coil.coilCompose
 	implementation Libs.DependencyInjection.hilt
@@ -88,11 +93,13 @@ dependencies {
 	implementation Libs.GoogleBilling.billing
 	implementation Libs.GoogleBilling.billingKtx
 
+	// testing
 	testImplementation Libs.UnitTesting.junit
 	testImplementation Libs.AndroidX.Test.core
 	testImplementation Libs.AndroidX.Test.rules
 	testImplementation Libs.AndroidX.Test.Ext.androidXjunit
 	testImplementation Libs.AndroidX.Test.Ext.truth
 
+	// module dependency
 	implementation project(':model')
 }

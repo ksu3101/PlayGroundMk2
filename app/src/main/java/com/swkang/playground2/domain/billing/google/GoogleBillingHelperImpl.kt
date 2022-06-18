@@ -6,5 +6,4 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 
 class GoogleBillingHelperImpl(
     @ApplicationContext context: Context
-): GoogleBillingHelper {
-}
+) : GoogleBillingHelper

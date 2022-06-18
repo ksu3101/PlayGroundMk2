@@ -51,6 +51,10 @@ object Libs {
         const val billingKtx = "com.android.billingclient:billing-ktx:$ver"
     }
 
+    object Material {
+        const val material3 = "com.google.android.material:material:1.6.1"
+    }
+
     object AndroidX {
         const val appcompat = "androidx.appcompat:appcompat:1.4.1"
         const val coreKtx = "androidx.core:core-ktx:1.7.0"
@@ -73,11 +77,12 @@ object Libs {
             const val toolingPreview = "androidx.compose.ui:ui-tooling-preview:$ver"
             const val activityCompose = "androidx.activity:activity-compose:1.4.0"
             const val test = "androidx.compose.test:test-core:$ver"
-        }
+            const val font = "androidx.compose.ui:ui-text-google-fonts:1.2.0-rc01"
 
-        object Material {
-            private const val ver = "1.6.0-alpha03"
-            const val material = "com.google.android.material:material:$ver"
+            object Material3 {
+                private const val ver = "1.0.0-alpha10"
+                const val material3 = "androidx.compose.material3:material3:$ver"
+            }
         }
 
         object Test {

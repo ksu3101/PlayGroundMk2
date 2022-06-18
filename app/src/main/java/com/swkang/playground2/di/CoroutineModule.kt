@@ -33,7 +33,6 @@ object CoroutineModule {
     @MainImmediateDispatcher
     @Provides
     fun provideMainImmediateDispatcher(): CoroutineDispatcher = Dispatchers.Main.immediate
-
 }
 
 @Retention(AnnotationRetention.BINARY)

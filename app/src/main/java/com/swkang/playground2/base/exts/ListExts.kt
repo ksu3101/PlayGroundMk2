@@ -33,7 +33,7 @@ fun <E> List<E>?.get(index: Int): E? {
 }
 
 /**
- * immutable list에 대해 원소를 추가 한다. 
+ * immutable list에 대해 원소를 추가 한다.
  */
 fun <E> List<E>.add(e: E): List<E> {
     val mutableList = this.toMutableList()

@@ -5,5 +5,4 @@ import androidx.appcompat.app.AppCompatActivity
 /**
  * @author burkd
  */
-abstract class BaseActivity : AppCompatActivity() {
-}
+abstract class BaseActivity : AppCompatActivity()
