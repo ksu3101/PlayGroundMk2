@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 /**
  * @author burkdog
  */
-class BaseViewModel : ViewModel() {
+abstract class BaseViewModel : ViewModel() {
 
     protected infix fun <T> MutableSharedFlow<T>.emmitting(data: T) {
         viewModelScope.launch {

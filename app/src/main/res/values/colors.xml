@@ -13,4 +13,7 @@
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="payment_opt_guide_title">#202124</color>
+    <color name="payment_opt_guide_sub">#5F6368</color>
 </resources>
