@@ -1,10 +1,16 @@
 package com.swkang.playground2.view.main
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
@@ -15,27 +21,27 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.swkang.playground2.R
-import com.swkang.playground2.theme.Blue40
-import com.swkang.playground2.theme.PlayGroundTheme
-import com.swkang.playground2.theme.Red40
-import com.swkang.playground2.theme.Yellow80
+import com.swkang.playground2.theme.DarkBlue30
+import com.swkang.playground2.theme.DarkBlue80
 import kotlinx.coroutines.launch
 
 @Composable
-fun Main() {
+fun Main(
+    onTestGoogleBillingBtn: () -> Unit
+) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
-    val colors = arrayListOf(
-        Blue40,
-        Yellow80,
-        Red40
-    )
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
@@ -43,6 +49,7 @@ fun Main() {
                 title = {
                     stringResource(id = R.string.app_name)
                 },
+                contentColor = Color.Black,
                 navigationIcon = {
                     IconButton(onClick = {
                         scope.launch {
@@ -57,7 +64,7 @@ fun Main() {
                         )
                     }
                 },
-                backgroundColor = Color.Blue
+                backgroundColor = DarkBlue80
             )
         },
         drawerContent = {
@@ -65,29 +72,53 @@ fun Main() {
         },
         drawerBackgroundColor = Color.White,
         content = { innerPadding ->
-            LazyColumn(contentPadding = innerPadding) {
-                items(count = 10) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(60.dp)
-                            .background(colors[it % colors.size])
-                    )
-                }
+            Column(
+                modifier = Modifier.padding(innerPadding)
+                    .fillMaxWidth()
+                    .wrapContentSize(Alignment.Center),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Spacer(modifier = Modifier.height(5.dp))
+                MainButton(R.string.btn_title_google_billing, onTestGoogleBillingBtn)
+                MainButton(R.string.btn_title_second, onTestGoogleBillingBtn)
+                MainButton(R.string.btn_title_third, onTestGoogleBillingBtn)
             }
         }
     )
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+private fun MainButton(
+    @StringRes text: Int,
+    onClicked: () -> Unit
+) {
+    val shape = RoundedCornerShape(size = 6.dp)
+    Button(
+        onClick = { onClicked() },
+        shape = shape,
+        modifier = Modifier.fillMaxWidth()
+            .padding(
+                horizontal = 12.dp,
+                vertical = 6.dp
+            )
+            .clip(shape)
+            .background(DarkBlue30)
+    ) {
+        Text(
+            text = stringResource(text),
+            fontSize = 24.sp,
+            color = Color.White,
+            textAlign = TextAlign.Center,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.fillMaxWidth()
+                .padding(8.dp)
+        )
+    }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
-fun DefaultPreview() {
-    PlayGroundTheme {
-        Greeting("Android")
-    }
+fun MainPreview() {
+    Main({})
 }

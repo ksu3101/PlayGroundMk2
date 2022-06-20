@@ -68,28 +68,33 @@ android {
 dependencies {
 	implementation Libs.Coroutines.android
 	implementation Libs.Kotlin.stdLibs
-
+	implementation Libs.AndroidX.Lifecycle.viewmodel
+	implementation Libs.AndroidX.Lifecycle.viewModelCompose
 	implementation Libs.AndroidX.coreKtx
 	implementation Libs.AndroidX.appcompat
 
 	// material design
 	implementation Libs.Material.material3
+
+	// compose
 	implementation Libs.AndroidX.Compose.material
 	implementation Libs.AndroidX.Compose.materialIconsExtended
 	implementation Libs.AndroidX.Compose.Material3.material3
-
-	implementation Libs.AndroidX.Lifecycle.viewmodel
-	implementation Libs.AndroidX.Lifecycle.viewModelCompose
 	implementation Libs.AndroidX.Compose.activityCompose
 	implementation Libs.AndroidX.Compose.toolingPreview
 	implementation Libs.AndroidX.Compose.runtime
 	implementation Libs.AndroidX.Compose.runtimeLivedata
 	implementation Libs.AndroidX.Compose.font
 	debugImplementation Libs.AndroidX.Compose.tooling
+
+	// coil
 	implementation Libs.Coil.coilCompose
+
+	// hilt
 	implementation Libs.DependencyInjection.hilt
-	implementation Libs.DependencyInjection.hiltViewModel
 	kapt Libs.DependencyInjection.hiltKapt
+
+	// google billing
 	implementation Libs.GoogleBilling.billing
 	implementation Libs.GoogleBilling.billingKtx
 

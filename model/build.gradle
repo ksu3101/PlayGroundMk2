@@ -2,7 +2,7 @@ import com.swkang.playground2.buildsrc.Version
 import com.swkang.playground2.buildsrc.Libs
 
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
@@ -51,7 +51,6 @@ dependencies {
     implementation Libs.AndroidX.Lifecycle.viewmodel
     implementation Libs.AndroidX.Lifecycle.viewModelCompose
     implementation Libs.DependencyInjection.hilt
-    implementation Libs.DependencyInjection.hiltViewModel
     kapt Libs.DependencyInjection.hiltKapt
     implementation Libs.GoogleBilling.billing
     implementation Libs.GoogleBilling.billingKtx

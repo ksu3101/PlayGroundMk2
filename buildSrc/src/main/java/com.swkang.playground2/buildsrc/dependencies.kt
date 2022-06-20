@@ -32,7 +32,6 @@ object Libs {
         private const val ver = "2.42"
         const val hilt = "com.google.dagger:hilt-android:$ver"
         const val hiltKapt = "com.google.dagger:hilt-android-compiler:$ver"
-        const val hiltViewModel = "androidx.hilt:hilt-lifecycle-viewmodel$ver"
     }
 
     object Network {
