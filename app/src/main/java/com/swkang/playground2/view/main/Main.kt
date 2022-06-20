@@ -32,13 +32,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.swkang.playground2.R
-import com.swkang.playground2.theme.DarkBlue30
 import com.swkang.playground2.theme.DarkBlue80
 import kotlinx.coroutines.launch
 
+enum class MainButton {
+    GOOGLE_BILLING,
+    SECOND,
+    THIRD
+}
+
 @Composable
 fun Main(
-    onTestGoogleBillingBtn: () -> Unit
+    onButtonClicked: (button: MainButton) -> Unit
 ) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
@@ -47,7 +52,7 @@ fun Main(
         topBar = {
             TopAppBar(
                 title = {
-                    stringResource(id = R.string.app_name)
+                    Text(text = stringResource(id = R.string.app_name))
                 },
                 contentColor = Color.Black,
                 navigationIcon = {
@@ -68,7 +73,7 @@ fun Main(
             )
         },
         drawerContent = {
-            Text("Drawer")
+            MainDrawer()
         },
         drawerBackgroundColor = Color.White,
         content = { innerPadding ->
@@ -79,13 +84,26 @@ fun Main(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                Spacer(modifier = Modifier.height(5.dp))
-                MainButton(R.string.btn_title_google_billing, onTestGoogleBillingBtn)
-                MainButton(R.string.btn_title_second, onTestGoogleBillingBtn)
-                MainButton(R.string.btn_title_third, onTestGoogleBillingBtn)
+                Spacer(modifier = Modifier.height(15.dp))
+                MainButton(
+                    R.string.btn_title_google_billing,
+                ) { onButtonClicked(MainButton.GOOGLE_BILLING) }
+                MainButton(
+                    R.string.btn_title_second,
+                ) { onButtonClicked(MainButton.SECOND) }
+                MainButton(
+                    R.string.btn_title_third
+                ) { onButtonClicked(MainButton.THIRD) }
             }
         }
     )
+}
+
+@Preview
+@Composable
+fun MainPreview() {
+    Main {
+    }
 }
 
 @Composable
@@ -93,7 +111,7 @@ private fun MainButton(
     @StringRes text: Int,
     onClicked: () -> Unit
 ) {
-    val shape = RoundedCornerShape(size = 6.dp)
+    val shape = RoundedCornerShape(size = 10.dp)
     Button(
         onClick = { onClicked() },
         shape = shape,
@@ -103,7 +121,7 @@ private fun MainButton(
                 vertical = 6.dp
             )
             .clip(shape)
-            .background(DarkBlue30)
+            .background(DarkBlue80)
     ) {
         Text(
             text = stringResource(text),
@@ -119,6 +137,6 @@ private fun MainButton(
 
 @Preview
 @Composable
-fun MainPreview() {
-    Main({})
+private fun MainDrawer() {
+    Text("Drawer")
 }

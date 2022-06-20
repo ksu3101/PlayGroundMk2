@@ -17,10 +17,21 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             PlayGroundTheme {
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
-                    Main({
-                        Log.d(TAG, "onClicked `Test Google Billing Btn`.")
-                    })
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background
+                ) {
+                    Main {
+                        // handle click events.
+                        Log.d(TAG, "onClicked : ${it.name}")
+                        when (it) {
+                            MainButton.GOOGLE_BILLING -> {
+                                // todo : 구글 결제 화면 이동
+                            }
+                            MainButton.SECOND -> {}
+                            MainButton.THIRD -> {}
+                        }
+                    }
                 }
             }
         }
