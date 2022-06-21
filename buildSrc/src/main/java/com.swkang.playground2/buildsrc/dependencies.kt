@@ -54,6 +54,13 @@ object Libs {
         const val material3 = "com.google.android.material:material:1.6.1"
     }
 
+    object Navigation {
+        private const val ver = "2.4.2"
+        const val fragment = "androidx.navigation:navigation-fragment-ktx:$ver"
+        const val navUiKtx = "androidx.navigation:navigation-ui-ktx:$ver"
+        const val compose = "androidx.navigation:navigation-compose:$ver"
+    }
+
     object AndroidX {
         const val appcompat = "androidx.appcompat:appcompat:1.4.1"
         const val coreKtx = "androidx.core:core-ktx:1.7.0"

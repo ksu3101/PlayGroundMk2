@@ -17,7 +17,7 @@
             android:name=".PlayGroundApplication"
             tools:targetApi="31">
         <activity
-                android:name=".view.main.MainActivity"
+                android:name="com.swkang.playground2.domain.main.MainActivity"
                 android:exported="true"
                 android:label="@string/app_name"
                 android:theme="@style/Theme.PlayGroundMk2">
@@ -28,7 +28,7 @@
         </activity>
 
         <activity
-                android:name=".view.billing.GoogleBillingActivity"
+                android:name="com.swkang.playground2.domain.billing.GoogleBillingActivity"
                 android:exported="false" />
     </application>
 

@@ -9,7 +9,7 @@ toy project "PlayGround Mk2".
 - Jetpack / Compose
 - Meterial3
 - Hilt
-- Retrofit2, OkHttp3, Moshi
+- Retrofit2, OkHttp3, Moshi, Coil
 - Google billing
 
 ## 1. 아키텍쳐

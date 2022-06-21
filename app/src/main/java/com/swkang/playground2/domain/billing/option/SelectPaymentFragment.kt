@@ -1,4 +1,4 @@
-package com.swkang.playground2.view.billing.option
+package com.swkang.playground2.domain.billing.option
 
 import android.os.Bundle
 import android.view.LayoutInflater

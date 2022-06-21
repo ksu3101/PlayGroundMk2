@@ -1,4 +1,4 @@
-package com.swkang.playground2.view.billing
+package com.swkang.playground2.domain.billing
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

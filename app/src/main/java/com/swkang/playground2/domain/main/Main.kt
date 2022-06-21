@@ -1,4 +1,4 @@
-package com.swkang.playground2.view.main
+package com.swkang.playground2.domain.main
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
@@ -31,20 +31,17 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
 import com.swkang.playground2.R
 import com.swkang.playground2.theme.DarkBlue80
 import kotlinx.coroutines.launch
 
-enum class MainButton {
-    GOOGLE_BILLING,
-    SECOND,
-    THIRD
-}
+const val NAV_MAIN = "main"
 
 @Composable
-fun Main(
-    onButtonClicked: (button: MainButton) -> Unit
-) {
+fun Main() {
+    val navController = rememberNavController()
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     Scaffold(
@@ -87,13 +84,13 @@ fun Main(
                 Spacer(modifier = Modifier.height(15.dp))
                 MainButton(
                     R.string.btn_title_google_billing,
-                ) { onButtonClicked(MainButton.GOOGLE_BILLING) }
+                ) {  }
                 MainButton(
                     R.string.btn_title_second,
-                ) { onButtonClicked(MainButton.SECOND) }
+                ) {  }
                 MainButton(
                     R.string.btn_title_third
-                ) { onButtonClicked(MainButton.THIRD) }
+                ) {  }
             }
         }
     )
@@ -102,8 +99,7 @@ fun Main(
 @Preview
 @Composable
 fun MainPreview() {
-    Main {
-    }
+    Main()
 }
 
 @Composable
@@ -111,16 +107,16 @@ private fun MainButton(
     @StringRes text: Int,
     onClicked: () -> Unit
 ) {
-    val shape = RoundedCornerShape(size = 10.dp)
+    val roundedCornerShape = RoundedCornerShape(size = 10.dp)
     Button(
         onClick = { onClicked() },
-        shape = shape,
+        shape = roundedCornerShape,
         modifier = Modifier.fillMaxWidth()
             .padding(
                 horizontal = 12.dp,
                 vertical = 6.dp
             )
-            .clip(shape)
+            .clip(roundedCornerShape)
             .background(DarkBlue80)
     ) {
         Text(

@@ -76,6 +76,11 @@ dependencies {
 	// material design
 	implementation Libs.Material.material3
 
+	// navigation
+	implementation Libs.Navigation.fragment
+	implementation Libs.Navigation.navUiKtx
+	implementation Libs.Navigation.compose
+
 	// compose
 	implementation Libs.AndroidX.Compose.material
 	implementation Libs.AndroidX.Compose.materialIconsExtended
