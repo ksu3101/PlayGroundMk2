@@ -31,7 +31,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.swkang.playground2.R
 import com.swkang.playground2.theme.DarkBlue80
@@ -79,18 +78,18 @@ fun Main() {
                     .fillMaxWidth()
                     .wrapContentSize(Alignment.Center),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
-                Spacer(modifier = Modifier.height(15.dp))
+                Spacer(modifier = Modifier.height(10.dp))
                 MainButton(
                     R.string.btn_title_google_billing,
-                ) {  }
+                ) { }
                 MainButton(
                     R.string.btn_title_second,
-                ) {  }
+                ) { }
                 MainButton(
                     R.string.btn_title_third
-                ) {  }
+                ) { }
             }
         }
     )
@@ -112,10 +111,7 @@ private fun MainButton(
         onClick = { onClicked() },
         shape = roundedCornerShape,
         modifier = Modifier.fillMaxWidth()
-            .padding(
-                horizontal = 12.dp,
-                vertical = 6.dp
-            )
+            .padding(horizontal = 12.dp)
             .clip(roundedCornerShape)
             .background(DarkBlue80)
     ) {
