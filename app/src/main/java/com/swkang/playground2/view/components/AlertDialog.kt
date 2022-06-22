@@ -98,7 +98,6 @@ fun PlayGroundAlertDialog(
                         items(items = buttons, itemContent = { item ->
                             PlayGroundDialogButton(
                                 btnText = item.btnText,
-                                fillMaxWidthFraction = item.fillMaxWidthFraction,
                                 modifier = Modifier.fillParentMaxWidth(item.fillMaxWidthFraction)
                             ) {
                                 onButtonClicked(item.btnType)
@@ -115,7 +114,6 @@ fun PlayGroundAlertDialog(
 private fun PlayGroundDialogButton(
     modifier: Modifier = Modifier,
     btnText: String,
-    @FloatRange(from = 0.0, to = 1.0) fillMaxWidthFraction: Float = 1.0f,
     onClick: () -> Unit
 ) {
     TextButton(

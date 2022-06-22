@@ -15,7 +15,7 @@
     <string name="payment_opt_guide_list_sub4">구매 시 사용할 수 있는 혜택</string>
     <string name="payment_opt_guide_footer">Google은 Google Play를 통한 구매만 보호합니다. Play 기프트 카드, Play 포인트, 구매 관리, 정기 결제 관리와 같은 Google Play가 제공하는 기능은 결제 시 Google Play를 선택한 경우에만 사용할 수 있습니다.</string>
 
-    <string name="btn_title_second">두번째 테스트 버튼</string>
+    <string name="btn_title_second">테스트 얼럿 다이얼로그</string>
     <string name="btn_title_third">세번째 테스트 버튼</string>
     
 </resources>
