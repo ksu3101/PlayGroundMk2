@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import com.swkang.playground2.R
+import com.swkang.playground2.domain.billing.option.PaymentOptionGuide
 import com.swkang.playground2.theme.DarkBlue80
 import com.swkang.playground2.view.components.DialogButtons
 import com.swkang.playground2.view.components.PlayGroundAlertDialog
@@ -52,6 +53,7 @@ fun Main() {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     val isDialogShown = remember { mutableStateOf(false) }
+    val isGoogleBillingPaymentOptionsGuideShown = remember { mutableStateOf(false) }
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
@@ -92,7 +94,9 @@ fun Main() {
                 Spacer(modifier = Modifier.height(10.dp))
                 MainButton(
                     R.string.btn_title_google_billing,
-                ) { }
+                ) {
+                    isGoogleBillingPaymentOptionsGuideShown.value = true
+                }
                 MainButton(
                     R.string.btn_title_second,
                 ) {
@@ -120,7 +124,21 @@ fun Main() {
                         }
                     }
                 )
-            } // if (isDialogShown.value) {
+            } // if (isDialogShown.value)
+
+            // Google Billing payment option guide
+            if (isGoogleBillingPaymentOptionsGuideShown.value) {
+                PaymentOptionGuide(
+                    {
+                        isGoogleBillingPaymentOptionsGuideShown.value = false
+                        Toast.makeText(context, "구글결제 - 결제 옵션 화면 -> 자세히 알아보기 누름", Toast.LENGTH_SHORT).show()
+                    },
+                    {
+                        isGoogleBillingPaymentOptionsGuideShown.value = false
+                        Toast.makeText(context, "구글결제 - 결제 옵션 화면 -> 계속 누름", Toast.LENGTH_SHORT).show()
+                    }
+                )
+            } //  if (isGoogleBillingPaymentOptionsGuideShown.value)
         }
     )
 }

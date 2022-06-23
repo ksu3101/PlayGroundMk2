@@ -16,4 +16,5 @@
 
     <color name="payment_opt_guide_title">#202124</color>
     <color name="payment_opt_guide_sub">#5F6368</color>
+    <color name="payment_opt_line">#DADCE0</color>
 </resources>
