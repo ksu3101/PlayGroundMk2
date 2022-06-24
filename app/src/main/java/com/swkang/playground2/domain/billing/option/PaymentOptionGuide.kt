@@ -3,6 +3,8 @@ package com.swkang.playground2.domain.billing.option
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,6 +24,7 @@ import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -45,13 +48,22 @@ import com.swkang.playground2.theme.PlayGroundTheme
  */
 @Composable
 fun PaymentOptionGuide(
+    onBackgroundDimClicked: () -> Unit,
     onMoreInfomationsBtnClicked: () -> Unit,
     onContinueBtnClicked: () -> Unit
 ) {
     val isLandScape = LocalConfiguration.current.isLandscape()
+    val interactionSource = remember { MutableInteractionSource() }
     PlayGroundTheme {
         Surface(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize()
+                .clip(RoundedCornerShape(0.dp))
+                .clickable(
+                    interactionSource = interactionSource,
+                    indication = null // disable Ripple effect.
+                ) {
+                    onBackgroundDimClicked()
+                },
             color = Color.Black.copy(alpha = 0.6f) // dimm bg
         ) {
             PaymentOptionGuideColumn(
@@ -122,18 +134,24 @@ private fun PaymentOptionGuideColumn(
             text = stringResource(id = R.string.payment_opt_guide_footer),
             color = Color(R.color.payment_opt_guide_sub),
             fontSize = 12.sp,
-            lineHeight = 16.sp,
+            lineHeight = 14.sp,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 18.dp, bottom = 20.dp)
         )
-        Row(modifier = Modifier.fillMaxWidth().height(36.dp)) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(36.dp)
+        ) {
             OutlinedButton(
                 onClick = onMoreInfomationsBtnClicked,
                 border = BorderStroke(1.dp, Color(R.color.payment_opt_line)),
                 shape = RoundedCornerShape(3.dp),
                 colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(R.color.payment_opt_line)),
-                modifier = Modifier.fillMaxWidth(0.5f).fillMaxHeight()
+                modifier = Modifier
+                    .fillMaxWidth(0.5f)
+                    .fillMaxHeight()
                     .padding(end = 6.dp)
             ) {
                 Text(
@@ -147,7 +165,9 @@ private fun PaymentOptionGuideColumn(
                 onClick = onContinueBtnClicked,
                 shape = RoundedCornerShape(3.dp),
                 colors = ButtonDefaults.textButtonColors(GoogleBillingMainGreen),
-                modifier = Modifier.fillMaxWidth(1f).fillMaxHeight()
+                modifier = Modifier
+                    .fillMaxWidth(1f)
+                    .fillMaxHeight()
                     .padding(start = 6.dp)
             ) {
                 Text(
@@ -195,7 +215,7 @@ private fun DottedGuideText(text: String) {
 )
 @Composable
 fun PreviewPaymentOptionGuide() {
-    PaymentOptionGuide({}, {})
+    PaymentOptionGuide({}, {}, {})
 }
 
 @Preview(
@@ -206,5 +226,5 @@ fun PreviewPaymentOptionGuide() {
 )
 @Composable
 fun PreviewLandscapePaymentOptionGuide() {
-    PaymentOptionGuide({}, {})
+    PaymentOptionGuide({}, {}, {})
 }

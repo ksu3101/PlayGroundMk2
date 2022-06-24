@@ -1,7 +1,12 @@
 package com.swkang.playground2.domain.main
 
+import android.util.Log
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -125,22 +130,34 @@ fun Main() {
                     }
                 )
             } // if (isDialogShown.value)
-
-            // Google Billing payment option guide
-            if (isGoogleBillingPaymentOptionsGuideShown.value) {
-                PaymentOptionGuide(
-                    {
-                        isGoogleBillingPaymentOptionsGuideShown.value = false
-                        Toast.makeText(context, "구글결제 - 결제 옵션 화면 -> 자세히 알아보기 누름", Toast.LENGTH_SHORT).show()
-                    },
-                    {
-                        isGoogleBillingPaymentOptionsGuideShown.value = false
-                        Toast.makeText(context, "구글결제 - 결제 옵션 화면 -> 계속 누름", Toast.LENGTH_SHORT).show()
-                    }
-                )
-            } //  if (isGoogleBillingPaymentOptionsGuideShown.value)
         }
-    )
+    ) // scaffold
+
+    // Google Billing payment option guide
+    AnimatedVisibility(
+        visible = isGoogleBillingPaymentOptionsGuideShown.value,
+        enter = fadeIn(
+            initialAlpha = 0.0f
+        ),
+        exit = fadeOut(
+            animationSpec = tween(durationMillis = 200)
+        )
+    ) {
+        PaymentOptionGuide(
+            {
+                isGoogleBillingPaymentOptionsGuideShown.value = false
+                Log.d("MainActivity", "구글결제 - 결제 옵션 화면 -> 배경 딤 누름")
+            },
+            {
+                isGoogleBillingPaymentOptionsGuideShown.value = false
+                Toast.makeText(context, "구글결제 - 결제 옵션 화면 -> 자세히 알아보기 누름", Toast.LENGTH_SHORT).show()
+            },
+            {
+                isGoogleBillingPaymentOptionsGuideShown.value = false
+                Toast.makeText(context, "구글결제 - 결제 옵션 화면 -> 계속 누름", Toast.LENGTH_SHORT).show()
+            }
+        )
+    }
 }
 
 @Preview
