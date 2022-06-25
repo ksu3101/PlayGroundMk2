@@ -1,4 +1,4 @@
-package com.swkang.playground2.view.components
+package com.swkang.playground2.base.components
 
 import android.util.Log
 import androidx.annotation.FloatRange

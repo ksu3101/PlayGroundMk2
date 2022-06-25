@@ -45,8 +45,8 @@ import androidx.navigation.compose.rememberNavController
 import com.swkang.playground2.R
 import com.swkang.playground2.domain.billing.option.PaymentOptionGuide
 import com.swkang.playground2.theme.DarkBlue80
-import com.swkang.playground2.view.components.DialogButtons
-import com.swkang.playground2.view.components.PlayGroundAlertDialog
+import com.swkang.playground2.base.components.DialogButtons
+import com.swkang.playground2.base.components.PlayGroundAlertDialog
 import kotlinx.coroutines.launch
 
 const val NAV_MAIN = "main"

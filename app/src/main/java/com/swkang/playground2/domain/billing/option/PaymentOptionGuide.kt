@@ -81,30 +81,7 @@ private fun PaymentOptionGuideColumn(
     onMoreInfomationsBtnClicked: () -> Unit,
     onContinueBtnClicked: () -> Unit
 ) {
-    val innerPadding = 16.dp
-    val landScapeSidePadding = 24.dp
-    val bgCornerSize = 8.dp
-    val roundedCornerShape = RoundedCornerShape(
-        topStart = bgCornerSize,
-        topEnd = bgCornerSize
-    )
-    Column(
-        modifier = if (isLandScape) {
-            Modifier.requiredWidth(500.dp)
-        } else {
-            Modifier.fillMaxWidth()
-        }
-            .wrapContentSize(Alignment.BottomCenter)
-            .clip(roundedCornerShape)
-            .background(Color.White)
-            .padding(
-                start = if (isLandScape) landScapeSidePadding else innerPadding,
-                top = innerPadding,
-                end = if (isLandScape) landScapeSidePadding else innerPadding,
-                bottom = innerPadding
-            )
-
-    ) {
+    OptionGuideColumn(isLandScape) {
         Text(
             text = stringResource(id = R.string.payment_opt_guide_title),
             color = Color(R.color.payment_opt_guide_title),
