@@ -44,3 +44,5 @@ val BlueGrey80 = Color(0xFFC6C5D0)
 val BlueGrey90 = Color(0xFFE2E1EC)
 
 val GoogleBillingMainGreen = Color(0xFF01875F)
+val GoogleBillingSubGray = Color(0xFF5F6368)
+val GoogleBillingContainerBorderGray = Color(0xFFDADCE0)

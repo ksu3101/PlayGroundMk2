@@ -27,7 +27,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
@@ -78,26 +77,10 @@ private fun PaymentOptionGuideColumn(
     onContinueBtnClicked: () -> Unit
 ) {
     OptionGuideColumn(isLandScape) {
-        Text(
-            text = stringResource(id = R.string.payment_opt_guide_title),
-            color = Color(R.color.payment_opt_guide_title),
-            fontWeight = FontWeight.Bold,
-            fontSize = 18.sp,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(
-                    top = 18.dp,
-                    bottom = 20.dp
-                )
-        )
-        Text(
-            text = stringResource(id = R.string.payment_opt_guide_sub),
-            color = Color(R.color.payment_opt_guide_sub),
-            fontSize = 14.sp,
-            lineHeight = 18.sp,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 20.dp)
+        GuideTitleText(stringResource(id = R.string.payment_opt_guide_title))
+        GuideSubText(
+            stringResource(id = R.string.payment_opt_guide_sub),
+            modifier = Modifier.padding(bottom = 20.dp)
         )
         DottedGuideText(stringResource(id = R.string.payment_opt_guide_list_sub1))
         DottedGuideText(stringResource(id = R.string.payment_opt_guide_list_sub2))
