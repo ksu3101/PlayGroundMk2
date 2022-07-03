@@ -20,6 +20,11 @@ import androidx.compose.ui.unit.sp
 import com.swkang.playground2.R
 import com.swkang.playground2.theme.GoogleBillingSubGray
 
+sealed class OnPaymentMethodClicked {
+    object BackgroundDimm : OnPaymentMethodClicked()
+    object NeedMoreInfos : OnPaymentMethodClicked()
+}
+
 /**
  * @author burkdog
  */

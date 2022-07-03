@@ -45,7 +45,11 @@ import androidx.navigation.compose.rememberNavController
 import com.swkang.playground2.R
 import com.swkang.playground2.base.components.DialogButtons
 import com.swkang.playground2.base.components.PlayGroundAlertDialog
+import com.swkang.playground2.domain.billing.option.OnPaymentMethodClicked
 import com.swkang.playground2.domain.billing.option.PaymentOptionGuide
+import com.swkang.playground2.domain.billing.option.SelectGoogleInAppPurchase
+import com.swkang.playground2.domain.billing.option.SelectPaymentMethod
+import com.swkang.playground2.domain.billing.option.SelectThirdPartyMethod
 import com.swkang.playground2.theme.DarkBlue80
 import kotlinx.coroutines.launch
 
@@ -59,6 +63,7 @@ fun Main() {
     val scope = rememberCoroutineScope()
     val isDialogShown = remember { mutableStateOf(false) }
     val isGoogleBillingPaymentOptionsGuideShown = remember { mutableStateOf(false) }
+    val isGoogleBillingSelectPaymentGuideShown = remember { mutableStateOf(false) }
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
@@ -154,9 +159,36 @@ fun Main() {
             },
             {
                 isGoogleBillingPaymentOptionsGuideShown.value = false
+                isGoogleBillingSelectPaymentGuideShown.value = true
                 Toast.makeText(context, "구글결제 - 결제 옵션 화면 -> 계속 누름", Toast.LENGTH_SHORT).show()
             }
         )
+    }
+
+    AnimatedVisibility(
+        visible = isGoogleBillingSelectPaymentGuideShown.value,
+        enter = fadeIn(
+            initialAlpha = 0.0f
+        ),
+        exit = fadeOut(
+            animationSpec = tween(durationMillis = 200)
+        )
+    ) {
+        SelectPaymentMethod { clicked ->
+            when (clicked) {
+                OnPaymentMethodClicked.NeedMoreInfos -> {
+                    // todo : 외부 브라우저 이동 (https://support.google.com/googleplay/answer/11174377?hl=ko)
+                }
+                SelectThirdPartyMethod -> {
+                    // todo : 외부 결제 화면 이동
+                }
+                SelectGoogleInAppPurchase -> {
+                    // todo : 구글 인앱 결제 흐름 프로세스 진행
+                }
+                else -> Log.d("Main", "none handled method [$clicked]")
+            }
+            isGoogleBillingSelectPaymentGuideShown.value = false
+        }
     }
 }
 

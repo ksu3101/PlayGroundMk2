@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,6 +16,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
 import androidx.compose.material3.Text
@@ -26,6 +29,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -45,15 +49,15 @@ data class PaymentMethod(
     val payMethodList: List<Int>
 )
 
+object SelectThirdPartyMethod : OnPaymentMethodClicked()
+object SelectGoogleInAppPurchase : OnPaymentMethodClicked()
+
 /**
  * @author burkdog
  */
 @Composable
 fun SelectPaymentMethod(
-    onBackgroundDimClicked: () -> Unit,
-    onMoreInfosClicked: () -> Unit,
-    onSelectThridParty: () -> Unit,
-    onSelectGoogeInAppPurchase: () -> Unit
+    onClicked: (clicked: OnPaymentMethodClicked) -> Unit
 ) {
     val isLandScape = LocalConfiguration.current.isLandscape()
     val interactionSource = remember { MutableInteractionSource() }
@@ -66,15 +70,13 @@ fun SelectPaymentMethod(
                     interactionSource = interactionSource,
                     indication = null // disable Ripple effect.
                 ) {
-                    onBackgroundDimClicked()
+                    onClicked(OnPaymentMethodClicked.BackgroundDimm)
                 },
             color = Color.Black.copy(alpha = 0.6f) // dimm bg
         ) {
             SelectPaymentMethodColumn(
                 isLandScape = isLandScape,
-                onMoreInfosClicked = onMoreInfosClicked,
-                onSelectThridParty = onSelectThridParty,
-                onSelectGoogeInAppPurchase = onSelectGoogeInAppPurchase
+                onClicked = onClicked
             )
         }
     }
@@ -83,9 +85,7 @@ fun SelectPaymentMethod(
 @Composable
 private fun SelectPaymentMethodColumn(
     isLandScape: Boolean,
-    onMoreInfosClicked: () -> Unit,
-    onSelectThridParty: () -> Unit,
-    onSelectGoogeInAppPurchase: () -> Unit
+    onClicked: (clicked: OnPaymentMethodClicked) -> Unit
 ) {
     OptionGuideColumn(isLandScape) {
         GuideTitleText(stringResource(id = R.string.payment_opt_guide_title))
@@ -99,38 +99,48 @@ private fun SelectPaymentMethodColumn(
             color = GoogleBillingSubGray,
             style = TextStyle(textDecoration = TextDecoration.Underline),
             modifier = Modifier
-                .clickable { onMoreInfosClicked() }
+                .clickable { onClicked(OnPaymentMethodClicked.NeedMoreInfos) }
                 .padding(bottom = 30.dp)
         )
-        ThirdPaymentMethodColumn(
-            onSelectThridParty,
-            onSelectGoogeInAppPurchase
-        )
+        ThirdPaymentMethodColumn(onClicked)
     }
 }
 
 @Composable
 private fun ThirdPaymentMethodColumn(
-    onSelectThridParty: () -> Unit,
-    onSelectGoogeInAppPurchase: () -> Unit
+    onClicked: (clicked: OnPaymentMethodClicked) -> Unit
 ) {
     Column {
         PaymentMethodContainer(
-            PaymentMethod(
+            data = PaymentMethod(
                 stringResource(id = R.string.app_name),
                 R.drawable.ic_launcher_background,
-                listOf()
+                listOf(
+                    // for test color resources.
+                    R.color.purple_200,
+                    R.color.teal_200,
+                    R.color.purple_700,
+                    R.color.primaryColor,
+                    R.color.payment_opt_guide_title
+                )
             ),
-            onSelectThridParty
+            onClicked = { onClicked(SelectThirdPartyMethod) }
         )
         Spacer(modifier = Modifier.size(12.dp))
         PaymentMethodContainer(
-            PaymentMethod(
+            data = PaymentMethod(
                 stringResource(id = R.string.payment_sel_guide_google_play),
                 R.drawable.ic_launcher_foreground,
-                listOf()
+                listOf(
+                    // for test color resources.
+                    R.color.purple_200,
+                    R.color.teal_200,
+                    R.color.purple_700,
+                    R.color.primaryColor,
+                    R.color.payment_opt_guide_title
+                )
             ),
-            onSelectGoogeInAppPurchase
+            onClicked = { onClicked(SelectGoogleInAppPurchase) }
         )
     }
 }
@@ -140,11 +150,12 @@ private fun ThirdPaymentMethodColumn(
  */
 @Composable
 private fun PaymentMethodContainer(
+    modifier: Modifier = Modifier,
     data: PaymentMethod,
-    onClicked: () -> Unit,
-    modifier: Modifier = Modifier
+    onClicked: () -> Unit
 ) {
     val roundedCornerShape = RoundedCornerShape(4.dp)
+    val paymentMethodRoundedCornerShape = RoundedCornerShape(1.dp)
     Column(
         modifier
             .fillMaxWidth()
@@ -165,7 +176,7 @@ private fun PaymentMethodContainer(
         ) {
             Image(
                 painterResource(id = data.icResId),
-                contentDescription = "",
+                contentDescription = "left_icon",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.size(24.dp)
             )
@@ -177,8 +188,47 @@ private fun PaymentMethodContainer(
                     text = data.title,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(60.dp)
+                        .padding(
+                            bottom = 18.dp
+                        )
                 )
+                Row(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    LazyRow(
+                        modifier = Modifier.wrapContentSize(),
+                    ) {
+                        items(
+                            items = data.payMethodList,
+                            itemContent = { item ->
+                                Box(
+                                    modifier = Modifier.size(
+                                        width = 30.dp,
+                                        height = 20.dp
+                                    ).clip(paymentMethodRoundedCornerShape)
+                                        .background(colorResource(id = item))
+                                        .border(
+                                            1.dp,
+                                            GoogleBillingContainerBorderGray,
+                                            shape = paymentMethodRoundedCornerShape
+                                        )
+                                )
+                                Spacer(
+                                    modifier = Modifier.size(
+                                        width = 6.dp,
+                                        height = 12.dp
+                                    )
+                                )
+                            }
+                        )
+                    }
+                    Text(
+                        text = stringResource(id = R.string.payment_sel_guide_another_pay_methods),
+                        color = Color(R.color.payment_opt_guide_title),
+                        fontSize = 12.sp,
+                        modifier = Modifier.padding(top = 2.dp)
+                    )
+                }
             }
         }
     }
@@ -187,7 +237,6 @@ private fun PaymentMethodContainer(
 @Preview
 @Composable
 fun PreviewSelectPaymentMethod() {
-    SelectPaymentMethod(
-        {}, {}, {}, {}
-    )
+    SelectPaymentMethod {
+    }
 }
