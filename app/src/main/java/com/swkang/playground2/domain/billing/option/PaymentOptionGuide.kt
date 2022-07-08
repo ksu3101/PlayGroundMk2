@@ -38,14 +38,18 @@ import com.swkang.playground2.theme.GoogleBillingMainGreen
 import com.swkang.playground2.theme.PlayGroundTheme
 
 /**
- * https://developer.android.com/google/play/billing/billing-choice?hl=ko
+ * 클릭 이벤트 - 결제 옵션 변경 화면 / "계속" -> 결제 방법 선택 화면 이동
+ */
+object NextSelectPaymentMethods : OnPaymentMethodClicked()
+
+/**
+ * 결제 옵션 변경 가이드 화면
+ * - https://developer.android.com/google/play/billing/billing-choice?hl=ko
  * @author burkdog
  */
 @Composable
 fun PaymentOptionGuide(
-    onBackgroundDimClicked: () -> Unit,
-    onMoreInfomationsBtnClicked: () -> Unit,
-    onContinueBtnClicked: () -> Unit
+    onClicked: (clicked: OnPaymentMethodClicked) -> Unit
 ) {
     val isLandScape = LocalConfiguration.current.isLandscape()
     val interactionSource = remember { MutableInteractionSource() }
@@ -57,14 +61,13 @@ fun PaymentOptionGuide(
                     interactionSource = interactionSource,
                     indication = null // disable Ripple effect.
                 ) {
-                    onBackgroundDimClicked()
+                    onClicked(OnPaymentMethodClicked.BackgroundDimm)
                 },
             color = Color.Black.copy(alpha = 0.6f) // dimm bg
         ) {
             PaymentOptionGuideColumn(
                 isLandScape,
-                onMoreInfomationsBtnClicked,
-                onContinueBtnClicked
+                onClicked
             )
         }
     }
@@ -73,8 +76,7 @@ fun PaymentOptionGuide(
 @Composable
 private fun PaymentOptionGuideColumn(
     isLandScape: Boolean,
-    onMoreInfomationsBtnClicked: () -> Unit,
-    onContinueBtnClicked: () -> Unit
+    onClicked: (clicked: OnPaymentMethodClicked) -> Unit
 ) {
     OptionGuideColumn(isLandScape) {
         GuideTitleText(stringResource(id = R.string.payment_opt_guide_title))
@@ -101,7 +103,7 @@ private fun PaymentOptionGuideColumn(
                 .height(36.dp)
         ) {
             OutlinedButton(
-                onClick = onMoreInfomationsBtnClicked,
+                onClick = { onClicked(OnPaymentMethodClicked.NeedMoreInfos) },
                 border = BorderStroke(1.dp, Color(R.color.payment_opt_line)),
                 shape = RoundedCornerShape(3.dp),
                 colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(R.color.payment_opt_line)),
@@ -118,7 +120,7 @@ private fun PaymentOptionGuideColumn(
                 )
             }
             Button(
-                onClick = onContinueBtnClicked,
+                onClick = { onClicked(NextSelectPaymentMethods) },
                 shape = RoundedCornerShape(3.dp),
                 colors = ButtonDefaults.textButtonColors(GoogleBillingMainGreen),
                 modifier = Modifier
@@ -171,7 +173,8 @@ private fun DottedGuideText(text: String) {
 )
 @Composable
 fun PreviewPaymentOptionGuide() {
-    PaymentOptionGuide({}, {}, {})
+    PaymentOptionGuide {
+    }
 }
 
 @Preview(
@@ -182,5 +185,6 @@ fun PreviewPaymentOptionGuide() {
 )
 @Composable
 fun PreviewLandscapePaymentOptionGuide() {
-    PaymentOptionGuide({}, {}, {})
+    PaymentOptionGuide {
+    }
 }

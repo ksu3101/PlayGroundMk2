@@ -43,16 +43,39 @@ import com.swkang.playground2.theme.GoogleBillingContainerBorderGray
 import com.swkang.playground2.theme.GoogleBillingSubGray
 import com.swkang.playground2.theme.PlayGroundTheme
 
+/**
+ * 결제 방법 데이터
+ */
 data class PaymentMethod(
+    /**
+     * 타이틀 문구
+     */
     val title: String,
+    /**
+     * 좌측 아이콘 이미지의 리소스 아이디
+     * 1. 앱 아이콘 -> 3자 결제
+     * 2. 구글 플레이 아이콘 -> 구글에서 제공하는 결제 방식
+     */
     @DrawableRes val icResId: Int,
+    /**
+     * 결제 방법 아이콘들
+     * (예, 카카오, 각 은행, 토스 등)
+     */
     val payMethodList: List<Int>
 )
 
+/**
+ * 클릭 이벤트 - 3자 결제 방신 선택
+ */
 object SelectThirdPartyMethod : OnPaymentMethodClicked()
+
+/**
+ * 클릭 이벤트 - 구글 인앱 결제 선택
+ */
 object SelectGoogleInAppPurchase : OnPaymentMethodClicked()
 
 /**
+ * 결제 방식 선택 레이아웃
  * @author burkdog
  */
 @Composable

@@ -20,12 +20,25 @@ import androidx.compose.ui.unit.sp
 import com.swkang.playground2.R
 import com.swkang.playground2.theme.GoogleBillingSubGray
 
+/**
+ * 결제 옵션 변경 및 선택 화면들 공통 클릭 이벤트
+ */
 sealed class OnPaymentMethodClicked {
+    /**
+     * 배경 딤 선택 -> 현재 상태 취소
+     */
     object BackgroundDimm : OnPaymentMethodClicked()
+
+    /**
+     * 더 많은 정보 보기 -> 외부 브라우저를 통해 아래 url이동
+     * - https://support.google.com/googleplay/answer/11174377?hl=ko
+     */
     object NeedMoreInfos : OnPaymentMethodClicked()
 }
 
 /**
+ * 결제 옵션 변경 및 선택 화면 공통 뷰
+ * - 하단 배경
  * @author burkdog
  */
 @Composable
@@ -59,6 +72,11 @@ fun OptionGuideColumn(
     )
 }
 
+/**
+ * 결제 옵션 변경 및 선택 화면 공통 뷰
+ * - 상단 타이틀
+ * @author burkdog
+ */
 @Composable
 fun GuideTitleText(text: String) {
     Text(
@@ -75,6 +93,11 @@ fun GuideTitleText(text: String) {
     )
 }
 
+/**
+ * 결제 옵션 변경 및 선택 화면 공통 뷰
+ * - 타이틀 아래 서브 텍스트
+ * @author burkdog
+ */
 @Composable
 fun GuideSubText(text: String, modifier: Modifier = Modifier) {
     Text(

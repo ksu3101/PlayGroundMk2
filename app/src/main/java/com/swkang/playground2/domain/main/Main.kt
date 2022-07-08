@@ -45,6 +45,7 @@ import androidx.navigation.compose.rememberNavController
 import com.swkang.playground2.R
 import com.swkang.playground2.base.components.DialogButtons
 import com.swkang.playground2.base.components.PlayGroundAlertDialog
+import com.swkang.playground2.domain.billing.option.NextSelectPaymentMethods
 import com.swkang.playground2.domain.billing.option.OnPaymentMethodClicked
 import com.swkang.playground2.domain.billing.option.PaymentOptionGuide
 import com.swkang.playground2.domain.billing.option.SelectGoogleInAppPurchase
@@ -148,21 +149,19 @@ fun Main() {
             animationSpec = tween(durationMillis = 200)
         )
     ) {
-        PaymentOptionGuide(
-            {
-                isGoogleBillingPaymentOptionsGuideShown.value = false
-                Log.d("MainActivity", "구글결제 - 결제 옵션 화면 -> 배경 딤 누름")
-            },
-            {
-                isGoogleBillingPaymentOptionsGuideShown.value = false
-                Toast.makeText(context, "구글결제 - 결제 옵션 화면 -> 자세히 알아보기 누름", Toast.LENGTH_SHORT).show()
-            },
-            {
-                isGoogleBillingPaymentOptionsGuideShown.value = false
-                isGoogleBillingSelectPaymentGuideShown.value = true
-                Toast.makeText(context, "구글결제 - 결제 옵션 화면 -> 계속 누름", Toast.LENGTH_SHORT).show()
+        PaymentOptionGuide { clicked ->
+            isGoogleBillingPaymentOptionsGuideShown.value = false
+            when (clicked) {
+                OnPaymentMethodClicked.NeedMoreInfos -> {
+                    // todo : 외부 브라우저 이동 (https://support.google.com/googleplay/answer/11174377?hl=ko)
+                }
+                NextSelectPaymentMethods -> {
+                    // 결제 방법 선택 화면 등장
+                    isGoogleBillingSelectPaymentGuideShown.value = true
+                }
+                else -> Log.d("Main", "none handled method [$clicked]")
             }
-        )
+        }
     }
 
     AnimatedVisibility(
@@ -175,6 +174,7 @@ fun Main() {
         )
     ) {
         SelectPaymentMethod { clicked ->
+            isGoogleBillingSelectPaymentGuideShown.value = false
             when (clicked) {
                 OnPaymentMethodClicked.NeedMoreInfos -> {
                     // todo : 외부 브라우저 이동 (https://support.google.com/googleplay/answer/11174377?hl=ko)
@@ -187,7 +187,6 @@ fun Main() {
                 }
                 else -> Log.d("Main", "none handled method [$clicked]")
             }
-            isGoogleBillingSelectPaymentGuideShown.value = false
         }
     }
 }
