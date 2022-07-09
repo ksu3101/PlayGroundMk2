@@ -117,27 +117,15 @@ fun Main() {
                     R.string.btn_title_third
                 ) { }
             } // column
-
-            // AlertDialog setup
-            if (isDialogShown.value) {
-                PlayGroundAlertDialog(
-                    message = R.string.payment_opt_guide_sub,
-                    leftButtonText = R.string.c_no,
-                    rightButtonText = R.string.c_confirm,
-                    onDismiss = { isDialogShown.value = false },
-                    onButtonClicked = {
-                        when (it) {
-                            DialogButtons.LEFT -> isDialogShown.value = false
-                            DialogButtons.RIGHT -> {
-                                isDialogShown.value = false
-                                Toast.makeText(context, "다이얼로그 -> 확인 버튼 누름", Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                    }
-                )
-            } // if (isDialogShown.value)
         }
     ) // scaffold
+
+    // 테스트용 얼럿 다이얼로그
+    if (isDialogShown.value) {
+        PlayGroundAlertDialog {
+            isDialogShown.value = false
+        }
+    }
 
     // Google Billing payment option guide
     AnimatedVisibility(
@@ -195,6 +183,26 @@ fun Main() {
 @Composable
 fun MainPreview() {
     Main()
+}
+
+@Composable
+private fun PlayGroundAlertDialog(onDismiss: () -> Unit) {
+    val context = LocalContext.current
+    PlayGroundAlertDialog(
+        message = R.string.payment_opt_guide_sub,
+        leftButtonText = R.string.c_no,
+        rightButtonText = R.string.c_confirm,
+        onDismiss = onDismiss,
+        onButtonClicked = {
+            when (it) {
+                DialogButtons.LEFT -> onDismiss()
+                DialogButtons.RIGHT -> {
+                    onDismiss()
+                    Toast.makeText(context, "다이얼로그 -> 확인 버튼 누름", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    )
 }
 
 @Composable

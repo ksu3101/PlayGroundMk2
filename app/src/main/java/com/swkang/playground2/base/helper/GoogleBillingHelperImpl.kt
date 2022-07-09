@@ -63,7 +63,7 @@ class GoogleBillingHelperImpl(
         _statePublisher.asSharedFlow()
 
     override suspend fun queryGemProducts() {
-        Log.d(TAG, ">> requestGemProducts()")
+        Log.d(TAG, ">> queryGemProducts()")
         val params = QueryProductDetailsParams.newBuilder()
         val productList = arrayListOf<QueryProductDetailsParams.Product>()
         PRODUCTS.forEach {

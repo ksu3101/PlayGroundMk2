@@ -1,4 +1,4 @@
-package com.swkang.playground2.domain.billing
+package com.swkang.model.domain.billing.google
 
 import com.android.billingclient.api.Purchase
 import com.swkang.model.base.BaseViewModel
