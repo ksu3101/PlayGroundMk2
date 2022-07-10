@@ -212,7 +212,7 @@ private fun MainButton(
 ) {
     val roundedCornerShape = RoundedCornerShape(size = 10.dp)
     Button(
-        onClick = { onClicked() },
+        onClick = onClicked,
         shape = roundedCornerShape,
         modifier = Modifier.fillMaxWidth()
             .padding(horizontal = 12.dp)
