@@ -7,6 +7,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -34,6 +35,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -43,6 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import com.swkang.playground2.R
+import com.swkang.playground2.base.components.BounceButton
 import com.swkang.playground2.base.components.DialogButtons
 import com.swkang.playground2.base.components.PlayGroundAlertDialog
 import com.swkang.playground2.domain.billing.option.NextSelectPaymentMethods
@@ -51,6 +54,7 @@ import com.swkang.playground2.domain.billing.option.PaymentOptionGuide
 import com.swkang.playground2.domain.billing.option.SelectGoogleInAppPurchase
 import com.swkang.playground2.domain.billing.option.SelectPaymentMethod
 import com.swkang.playground2.domain.billing.option.SelectThirdPartyMethod
+import com.swkang.playground2.theme.DarkBlue20
 import com.swkang.playground2.theme.DarkBlue80
 import kotlinx.coroutines.launch
 
@@ -116,8 +120,31 @@ fun Main() {
                 MainButton(
                     R.string.btn_title_third
                 ) { }
+                BounceButton(
+                    modifier = Modifier.fillMaxWidth()
+                        .height(60.dp)
+                        .padding(horizontal = 12.dp)
+                        .clip(RoundedCornerShape(size = 10.dp))
+                        .background(DarkBlue20),
+                    onClick = {
+                        Toast.makeText(context, "bounce button!!", Toast.LENGTH_SHORT).show()
+                    }
+                ) { scale ->
+                    Text(
+                        text = "Bounce Button",
+                        fontSize = 24.sp,
+                        color = Color.White,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth()
+                            .padding(8.dp)
+                            .graphicsLayer {
+                                scaleX = scale
+                                scaleY = scale
+                            }
+                    )
+                }
             } // column
-        }
+        } // content { }
     ) // scaffold
 
     // 테스트용 얼럿 다이얼로그

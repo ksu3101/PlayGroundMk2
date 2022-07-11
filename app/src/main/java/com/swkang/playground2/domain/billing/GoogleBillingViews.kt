@@ -42,7 +42,7 @@ fun GemItemCard(
     Card(
         modifier = Modifier.fillMaxWidth()
             .clickable { onItemClicked() },
-        elevation = CardDefaults.cardElevation(5.dp)
+        elevation = CardDefaults.cardElevation(10.dp)
     ) {
         Image(
             painter = painterResource(id = bgDrawableRes),
@@ -59,7 +59,7 @@ fun GemItemCard(
                 Text(
                     text = title,
                     fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
+                    fontWeight = FontWeight.W900,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.fillMaxWidth(0.6f)
@@ -69,7 +69,6 @@ fun GemItemCard(
                 Text(
                     text = description,
                     fontSize = 14.sp,
-                    fontWeight = FontWeight.Bold,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     color = BlueGrey30
@@ -79,7 +78,6 @@ fun GemItemCard(
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Right,
                 text = price,
-                fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
@@ -97,7 +95,7 @@ fun PreviewGemItemCard() {
             append("테스트용 ")
             withStyle(
                 style = SpanStyle(
-                    fontWeight = FontWeight.W900,
+                    fontWeight = FontWeight.Bold,
                     color = Blue40
                 )
             ) {
