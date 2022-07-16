@@ -21,7 +21,10 @@
     <string name="payment_sel_guide_google_play">Google Play</string>
     <string name="payment_sel_guide_another_pay_methods">+ 그 외 결제수단</string>
 
-    <string name="btn_title_second">테스트 얼럿 다이얼로그</string>
+    <string name="btn_title_second">컴포즈 UI 둘러보기</string>
+
+    <string name="uipg_login_failed">로그인 중 오류가 발생했습니다.\n시간이 지나고 다시 시도해 주세요.</string>
+
     <string name="btn_title_third">세번째 테스트 버튼</string>
     
 </resources>

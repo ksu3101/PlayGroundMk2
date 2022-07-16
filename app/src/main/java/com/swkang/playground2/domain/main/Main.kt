@@ -7,7 +7,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -28,6 +27,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -35,7 +35,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -45,7 +44,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import com.swkang.playground2.R
-import com.swkang.playground2.base.components.BounceButton
 import com.swkang.playground2.base.components.DialogButtons
 import com.swkang.playground2.base.components.PlayGroundAlertDialog
 import com.swkang.playground2.domain.billing.option.NextSelectPaymentMethods
@@ -54,7 +52,6 @@ import com.swkang.playground2.domain.billing.option.PaymentOptionGuide
 import com.swkang.playground2.domain.billing.option.SelectGoogleInAppPurchase
 import com.swkang.playground2.domain.billing.option.SelectPaymentMethod
 import com.swkang.playground2.domain.billing.option.SelectThirdPartyMethod
-import com.swkang.playground2.theme.DarkBlue20
 import com.swkang.playground2.theme.DarkBlue80
 import kotlinx.coroutines.launch
 
@@ -117,32 +114,6 @@ fun Main() {
                 ) {
                     isDialogShown.value = true
                 }
-                MainButton(
-                    R.string.btn_title_third
-                ) { }
-                BounceButton(
-                    modifier = Modifier.fillMaxWidth()
-                        .height(60.dp)
-                        .padding(horizontal = 12.dp)
-                        .clip(RoundedCornerShape(size = 10.dp))
-                        .background(DarkBlue20),
-                    onClick = {
-                        Toast.makeText(context, "bounce button!!", Toast.LENGTH_SHORT).show()
-                    }
-                ) { scale ->
-                    Text(
-                        text = "Bounce Button",
-                        fontSize = 24.sp,
-                        color = Color.White,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth()
-                            .padding(8.dp)
-                            .graphicsLayer {
-                                scaleX = scale
-                                scaleY = scale
-                            }
-                    )
-                }
             } // column
         } // content { }
     ) // scaffold
@@ -155,8 +126,28 @@ fun Main() {
     }
 
     // Google Billing payment option guide
+    PaymentOptionGuide(
+        isGoogleBillingPaymentOptionsGuideShown,
+        isGoogleBillingSelectPaymentGuideShown
+    )
+
+    // Google Billing select payment method page
+    SelectPaymentMethod(isGoogleBillingSelectPaymentGuideShown)
+}
+
+@Preview
+@Composable
+fun MainPreview() {
+    Main()
+}
+
+@Composable
+private fun PaymentOptionGuide(
+    isPaymentOptGuideVisible: MutableState<Boolean>,
+    isSelectPaymentMethod: MutableState<Boolean>
+) {
     AnimatedVisibility(
-        visible = isGoogleBillingPaymentOptionsGuideShown.value,
+        visible = isPaymentOptGuideVisible.value,
         enter = fadeIn(
             initialAlpha = 0.0f
         ),
@@ -165,22 +156,25 @@ fun Main() {
         )
     ) {
         PaymentOptionGuide { clicked ->
-            isGoogleBillingPaymentOptionsGuideShown.value = false
+            isPaymentOptGuideVisible.value = false
             when (clicked) {
                 OnPaymentMethodClicked.NeedMoreInfos -> {
                     // todo : 외부 브라우저 이동 (https://support.google.com/googleplay/answer/11174377?hl=ko)
                 }
                 NextSelectPaymentMethods -> {
                     // 결제 방법 선택 화면 등장
-                    isGoogleBillingSelectPaymentGuideShown.value = true
+                    isSelectPaymentMethod.value = true
                 }
                 else -> Log.d("Main", "none handled method [$clicked]")
             }
         }
     }
+}
 
+@Composable
+private fun SelectPaymentMethod(isSelectPaymentMethod: MutableState<Boolean>) {
     AnimatedVisibility(
-        visible = isGoogleBillingSelectPaymentGuideShown.value,
+        visible = isSelectPaymentMethod.value,
         enter = fadeIn(
             initialAlpha = 0.0f
         ),
@@ -189,7 +183,7 @@ fun Main() {
         )
     ) {
         SelectPaymentMethod { clicked ->
-            isGoogleBillingSelectPaymentGuideShown.value = false
+            isSelectPaymentMethod.value = false
             when (clicked) {
                 OnPaymentMethodClicked.NeedMoreInfos -> {
                     // todo : 외부 브라우저 이동 (https://support.google.com/googleplay/answer/11174377?hl=ko)
@@ -204,12 +198,6 @@ fun Main() {
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun MainPreview() {
-    Main()
 }
 
 @Composable
