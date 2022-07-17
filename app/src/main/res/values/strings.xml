@@ -24,6 +24,8 @@
     <string name="btn_title_second">컴포즈 UI 둘러보기</string>
 
     <string name="uipg_login_failed">로그인 중 오류가 발생했습니다.\n시간이 지나고 다시 시도해 주세요.</string>
+    <string name="uipg_login_wrong_inputs">로그인 정보중 일부가 없습니다.\n아이디와 비밀번호를 입력해주세요.</string>
+    <string name="uipg_login_success">로그인을 성공 했습니다.</string>
 
     <string name="btn_title_third">세번째 테스트 버튼</string>
     

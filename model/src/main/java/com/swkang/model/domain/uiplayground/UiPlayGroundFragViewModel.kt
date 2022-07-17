@@ -18,7 +18,7 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class UiPlayGroundFragViewModel @Inject constructor(
-    resourceHelper: ResourceHelper
+    val resourceHelper: ResourceHelper
 ) : BaseViewModel() {
     private val _uiPlayGroundState = MutableStateFlow<UiPlayGroundState>(UiPlayGroundState.Initialized)
     val uiPlayGroundState = _uiPlayGroundState.asStateFlow()
@@ -44,7 +44,7 @@ class UiPlayGroundFragViewModel @Inject constructor(
                 )
             }
         } catch (e: Exception) {
-            _uiPlayGroundState emmitting UiPlayGroundState.Error.LoginFailed
+            _uiPlayGroundState emmitting UiPlayGroundState.Error.LoginFailed(e.message ?: "")
         }
     }
 }

@@ -17,7 +17,9 @@ sealed class UiPlayGroundState {
         ) : Error()
 
         object EmptyInputField : Error()
-        object LoginFailed : Error()
+        data class LoginFailed(
+            val errorMsg: String = ""
+        ) : Error()
     }
 }
 

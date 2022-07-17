@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.swkang.model.domain.uiplayground.UiPlayGroundFragViewModel
@@ -42,11 +43,26 @@ fun UiPlayGround(viewModel: UiPlayGroundFragViewModel) {
             )
         }
         is UiPlayGroundState.LoginSuccess -> {
-            // TODO - 로그인 성공 : 완료 토스트 보여주고 예제 데이터를 같이 화면에 보여주면 될듯?
+            // 로그인 성공 : 완료 토스트 보여주고 예제 데이터를 같이 화면에 보여주면 될듯?
+            Toast.makeText(context, stringResource(id = R.string.uipg_login_success), Toast.LENGTH_SHORT).show()
         }
         is UiPlayGroundState.Error.Common -> {
-            // 공통 오류 : 일단 토스트 출력
+            // 공통 오류 : 토스트 출력
             Toast.makeText(context, stringResource(id = R.string.uipg_login_failed), Toast.LENGTH_SHORT).show()
+        }
+        is UiPlayGroundState.Error.EmptyInputField -> {
+            // 로그인 오류 -? 입력 필드 오류 : 토스트 출력
+            Toast.makeText(context, stringResource(id = R.string.uipg_login_wrong_inputs), Toast.LENGTH_SHORT).show()
+        }
+        is UiPlayGroundState.Error.LoginFailed -> {
+            // 로그인 오류 -> 로그인 실패 : 토스트 출력
+            Toast.makeText(
+                context,
+                state.errorMsg.ifEmpty {
+                    stringResource(id = R.string.uipg_login_failed)
+                },
+                Toast.LENGTH_SHORT
+            ).show()
         }
         else -> Log.w(TAG, "un handled state. [$state]")
     }
@@ -83,4 +99,10 @@ private fun PlayGroundContents(
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun PreviewPlayGroundContents() {
+    PlayGroundContents({})
 }
